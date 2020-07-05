@@ -1,0 +1,36 @@
+{% extends 'guild/base.html' %}
+{% load static %}
+{% block css %}
+{{ block.super }}
+<link rel="stylesheet" href="{% static 'css/requests/page.css' %}">
+{% endblock %}
+
+{% block content %}
+    <div class="jumbotron text-center">
+      <h1 class="display-4">{{ object }}</h1>
+      <p class="lead">{{ object.description }}</p>
+      <hr class="my-4">
+      <a class="btn btn-success btn-lg" href="{{ object.form.get_absolute_url }}" role="button">
+          <i class="fas fa-pencil-alt"></i>
+          Написать
+      </a>
+    </div>
+    <div class="row">
+        <div class="col-md-4">
+            {% include 'constrforms/includes/filter-requests.html' with rases=rases %}
+        </div>
+        <div class="col-md-8">
+            <div class="requests">
+            {% for request in paginator.object_list %}
+            {{ request.get_card }}
+            {% endfor %}
+            {% include 'includes/paginator.html' with paginator=paginator %}
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block js %}
+{{ block.super }}
+<script src="{% static 'js/request/ajax_filter.js' %}"></script>
+{% endblock %}

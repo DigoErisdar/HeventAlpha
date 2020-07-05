@@ -1,0 +1,17 @@
+{% load humanize %}
+<div class="card text-center">
+  <div class="card-header">
+    {{ request.status.get_color }}
+  </div>
+  <div class="card-body">
+    <h5 class="card-title">{{ request.char }}</h5>
+    <p class="card-text">{{ request.char.rase }} - {{ request.char.server }}</p>
+    <a href="{{ request.get_absolute_url }}" class="btn btn-primary">
+        <i class="fas fa-info-circle"></i>
+        Подробнее
+    </a>
+  </div>
+  <div class="card-footer text-muted">
+    {{ request.date_created|naturaltime }}
+  </div>
+</div>

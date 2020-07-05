@@ -1,0 +1,26 @@
+{% extends 'admin/delete_selected_confirmation.html' %}
+{% block content %}
+    Вы действительно хотите удалить данных соклан?
+    <ul>
+        {% for soklan in queryset %}
+            <li><a href="{% url 'admin:compositions_soklan_change' soklan.pk %}">{{ soklan }}</a> {{ soklan.char.rase }} {{ soklan.rank }}</li>
+        {% endfor %}
+    </ul>
+    Всего: {{ queryset.count }}
+    <form method="post">
+        {% csrf_token %}
+    <div>
+    {% for obj in queryset %}
+    <input type="hidden" name="{{ action_checkbox_name }}" value="{{ obj.pk }}">
+    {% endfor %}
+    <input type="hidden" name="action" value="delete_selected">
+    <input type="hidden" name="post" value="yes">
+    <p>
+        <label for="comment">Комментарий</label>
+        <input type="text" name="comment" id="comment">
+    </p>
+    <input type="submit" value="Да, удалить">
+    <a href="#" class="button cancel-link">Нет, я хочу вернуться назад</a>
+    </div>
+    </form>
+{% endblock %}

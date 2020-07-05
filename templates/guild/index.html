@@ -1,0 +1,7 @@
+{% extends 'guild/base.html' %}
+
+
+
+{% block content %}
+{{ request.user }} {{ perms.all }}
+{% endblock %}

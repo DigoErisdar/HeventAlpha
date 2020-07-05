@@ -1,0 +1,53 @@
+{% extends 'guild/base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="row">
+    <div class="col text-center h3">
+        {{ object.form.title }}
+    </div>
+</div>
+<form method="POST" id="request-form">
+    {% csrf_token %}
+    <div class="form-group row">
+        <label for="{{ form.char.id_for_label }}"
+               class="col-sm-2 col-form-label {% if form.char.field.required %}required{% endif %}">{{ form.char.label }}</label>
+        <div class="col-sm-10">
+            {{ form.char }}
+            {% if form.char.help_text %}
+                <small id="{{ form.char.id_for_label }}" class="form-text text-muted">{{ form.char.help_text }}</small>
+            {% endif %}
+            <div class="invalid-feedback" id="{{ form.char.name }}_errors">
+            </div>
+        </div>
+    </div>
+    {% for field in form %}
+        {% if field.name != 'char' %}
+            <div class="form-group row">
+                <label for="{{ field.id_for_label }}"
+                       class="col-sm-2 col-form-label {% if field.field.required %}required{% endif %}">{{ field.label }}</label>
+                <div class="col-sm-10">
+                    {{ field }}
+                    {% if field.help_text %}
+                        <small id="{{ field.id_for_label }}" class="form-text text-muted">{{ field.help_text }}</small>
+                    {% endif %}
+                    <div class="invalid-feedback" id="{{ field.name }}_errors">
+                    </div>
+                </div>
+            </div>
+        {% endif %}
+    {% endfor %}
+    <div class="text-center">
+        <input type="submit" value="Создать" class="btn btn-success">
+        <input type="button" value="Предпросмотр" class="btn btn-warning preview">
+    </div>
+</form>
+<div id="preview">
+
+</div>
+{% endblock %}
+
+{% block js %}
+{{ block.super }}
+<script src="{% static 'js/request/form.js' %}"></script>
+{% endblock %}

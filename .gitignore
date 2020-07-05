@@ -1,0 +1,36 @@
+.idea
+*.sqlite3
+.git
+venv
+**/__pycache__
+static
+media
+system/secret.py
+test.py
+
+docs/build
+*.pyc
+
+# Frontend
+
+# dependencies
+material/node_modules
+material/.pnp
+material/.pnp.js
+
+# testing
+material/coverage
+
+# production
+material/build
+
+# misc
+material/.DS_Store
+material/.env.local
+material/.env.development.local
+material/.env.test.local
+material/.env.production.local
+
+material/npm-debug.log*
+material/yarn-debug.log*
+material/yarn-error.log*

@@ -1,0 +1,30 @@
+{% extends 'guild/base.html' %}
+
+{% block content %}
+<div class="card text-center">
+  <div class="card-header">
+    <ul class="nav nav-pills card-header-pills">
+      <li class="nav-item">
+        <a class="nav-link" href="{{ object.form.requestpage.get_absolute_url }}">Список заявок </a>
+      </li>
+    </ul>
+  </div>
+  <div class="card-body text-left">
+    <h5 class="card-title text-center">{{ object.status.get_color }} {{ object }}</h5>
+    <p class="card-text">
+        <ul class="account-information"> Аккаунт
+            <li>Персонаж - {{ object.char }}</li>
+            <li>Раса - {{ object.char.rase }}</li>
+            <li>Сервер - {{ object.char.server }}</li>
+            {% if object.char.guild %}
+            <li>Гильдия - {{ object.char.guild }}</li>
+            {% endif %}
+        </ul><hr>
+        {{ object.text|safe }}
+    </p>
+  </div>
+    <div class="card-footer">
+      <small class="text-muted">Место для голосования</small>
+    </div>
+</div>
+{% endblock %}
